@@ -54,3 +54,12 @@ TestResult.xml
 nunit-*.xml
 
 .vs/
+
+# Pastas de saida de compilacaoo (Build)
+[Bb]in/
+[Oo]bj/
+
+# Arquivos de usuario e cache do VS
+.vs/
+*.user
+*.suo
