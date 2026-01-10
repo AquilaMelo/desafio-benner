@@ -4,7 +4,7 @@ using System.IO;
 namespace GeradorTxt
 {
     /// <summary>
-    /// Responsável por interagir com o usuário via console.
+    /// Responsável por interagir com o usuário via console..
     /// </summary>
     public static class MainConsole
     {
