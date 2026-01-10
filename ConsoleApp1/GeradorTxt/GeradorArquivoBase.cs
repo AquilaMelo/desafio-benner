@@ -55,7 +55,7 @@ namespace GeradorTxt
               .Append(ToMoney(doc.Valor)).AppendLine();
         }
 
-        protected void EscreverTipo02(StringBuilder sb, ItemDocumento item)
+        protected virtual void EscreverTipo02(StringBuilder sb, ItemDocumento item)
         {
             // 02|DESCRICAOITEM|VALORITEM
             sb.Append("02").Append("|")
