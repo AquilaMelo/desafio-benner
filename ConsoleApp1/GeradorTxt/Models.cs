@@ -1,5 +1,6 @@
 using ConsoleApp1.GeradorTxt;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 
 namespace GeradorTxt
 {
@@ -17,6 +18,20 @@ namespace GeradorTxt
         public string Numero { get; set; }
         public decimal Valor { get; set; }
         public List<ItemDocumento> Itens { get; set; }
+
+        public bool ValidarValor()
+        {
+            if (Itens == null || Itens.Count == 0)
+            {
+                return true;
+            }
+            decimal valorTotal = 0;
+            foreach (var item in Itens)
+            {
+                valorTotal += item.Valor;
+            }
+            return valorTotal == Valor;
+        }
     }
 
     public class ItemDocumento
@@ -24,6 +39,6 @@ namespace GeradorTxt
         public int NumeroItem { get; set; }
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
-        public List<Categoria> Categorias { get; set; } = new List<Categoria>();
+        public List<Categoria> Categorias { get; set; }
     }
 }

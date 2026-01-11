@@ -21,6 +21,11 @@ namespace GeradorTxt
                 EscreverTipo00(sb, emp);
                 foreach (var doc in emp.Documentos)
                 {
+                    if (!doc.ValidarValor())
+                    {
+                        Console.WriteLine($"O documento {doc.Numero} da empresa {emp.Nome} está com o valor divergente do valor total");
+                        throw new Exception();
+                    }
                     EscreverTipo01(sb, doc);
                     foreach (var item in doc.Itens)
                     {

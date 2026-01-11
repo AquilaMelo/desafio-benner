@@ -9,6 +9,6 @@ namespace ConsoleApp1.GeradorTxt
     public class Categoria
     {
         public int NumeroCategoria { get; set; }
-        public string Descricao { get; set; }
+        public string DescricaoCategoria { get; set; }
     }
 }

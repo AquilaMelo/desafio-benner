@@ -1,3 +1,4 @@
+using ConsoleApp1.GeradorTxt;
 using System;
 using System.IO;
 
@@ -14,6 +15,7 @@ namespace GeradorTxt
         public static void Run()
         {
             Directory.CreateDirectory(_outputDir);
+            var switchMenu = new SwitchMenu(_jsonPath, _outputDir);
             while (true)
             {
                 Console.WriteLine();
@@ -30,54 +32,15 @@ namespace GeradorTxt
                 switch (opt)
                 {
                     case "1":
-                        Console.Write("Informe o caminho completo do arquivo .json: ");
-                        var jp = Console.ReadLine();
-                        if (!string.IsNullOrWhiteSpace(jp) && File.Exists(jp))
-                        {
-                            _jsonPath = jp;
-                            Console.WriteLine("OK! JSON configurado: " + _jsonPath);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Caminho inválido ou arquivo não encontrado.");
-                        }
+                        switchMenu.Opcao1();
                         break;
 
                     case "2":
-                        Console.Write("Informe o diretório de saída para o .txt: ");
-                        var od = Console.ReadLine();
-                        if (!string.IsNullOrWhiteSpace(od))
-                        {
-                            _outputDir = od;
-                            Directory.CreateDirectory(_outputDir);
-                            Console.WriteLine("OK! Diretório de saída configurado: " + _outputDir);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Diretório inválido.");
-                        }
+                        switchMenu.Opcao2();
                         break;
 
                     case "3":
-                        Console.Write("Gerar arquivo");
-                        try
-                        {
-                            var gerador = new GeradorArquivoBase();
-
-                            var dados = JsonRepository.LoadEmpresas(_jsonPath);
-
-                            var fileName = $"saida_leiaute_versão 01_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
-
-                            var fullPath = Path.Combine(_outputDir, fileName);
-
-                            gerador.Gerar(dados, fullPath);
-
-                            Console.WriteLine("Arquivo gerado em: " + fullPath);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Erro ao gerar arquivo: " + ex.Message);
-                        }
+                        switchMenu.Opcao3();
                         break;
 
                     case "0":

@@ -18,11 +18,14 @@ namespace ConsoleApp1.GeradorTxt
               .Append(ToMoney(item.Valor)).AppendLine();
 
             // 03|NUMEROCATEGORIA|DESCRICAOCATEGORIA
-            foreach (var categoria in item.Categorias)
+            if (item.Categorias != null)
             {
-                sb.Append("03").Append("|")
-                  .Append(categoria.NumeroCategoria).Append("|")
-                  .Append(categoria.Descricao).AppendLine();
+                foreach (var categoria in item.Categorias)
+                {
+                    sb.Append("03").Append("|")
+                      .Append(categoria.NumeroCategoria).Append("|")
+                      .Append(categoria.DescricaoCategoria).AppendLine();
+                }
             }
         }
     }

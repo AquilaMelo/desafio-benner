@@ -46,7 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeradorTxt\Categoria.cs" />
+    <Compile Include="GeradorTxt\GeradorArquivoLayout02.cs" />
     <Compile Include="GeradorTxt\Models.cs" />
+    <Compile Include="GeradorTxt\SwitchMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GeradorTxt\GeradorArquivoBase.cs" />
