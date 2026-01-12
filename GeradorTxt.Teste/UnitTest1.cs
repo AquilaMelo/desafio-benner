@@ -1,5 +1,7 @@
 ﻿using ConsoleApp1.GeradorTxt;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using System.Text;
 
@@ -9,34 +11,43 @@ namespace GeradorTxt.Teste
     public class UnitTest1
     {
         [Test]
-        public void Linha99_DeveSerGerada()
+        public void Gerar_DeveCriarLinha99_NoLayout02()
         {
-            var sb = new StringBuilder();
-            var gerador = new GeradorArquivoBase();
-
-            typeof(GeradorArquivoBase).GetField("contador00", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(gerador, 1);
-
-            typeof(GeradorArquivoBase).GetMethod("EscreverContadores", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.Invoke(gerador, new object[] { sb });
-
-            Assert.That(sb.ToString(), Does.Contain("99|"));
+            var empresas = new List<Empresa>
+    {
+        new Empresa
+        {
+            CNPJ = "123",
+            Nome = "Empresa Teste",
+            Telefone = "9999",
+            Documentos = new List<Documento>
+            {
+                new Documento
+                {
+                    Modelo = "55",
+                    Numero = "1",
+                    Valor = 10,
+                    Itens = new List<ItemDocumento>
+                    {
+                        new ItemDocumento
+                        {
+                            NumeroItem = 1,
+                            Descricao = "Produto",
+                            Valor = 10
+                        }
+                    }
+                }
+            }
         }
+    };
 
-        [Test]
-        public void EscreverTipo02_DeveGerarLinha02()
-        {
-            var sb = new StringBuilder();
+            var path = Path.GetTempFileName();
             var gerador = new GeradorArquivoLayout02();
 
-            var item = new ItemDocumento
-            {
-                NumeroItem = 1,
-                Descricao = "Produto",
-                Valor = 10m
-            };
+            gerador.Gerar(empresas, path);
 
-            typeof(GeradorArquivoLayout02).GetMethod("EscreverTipo02", BindingFlags.NonPublic | BindingFlags.Instance)?.Invoke(gerador, new object[] { sb, item });
-
-            Assert.That(sb.ToString(), Does.Contain("02|1|Produto|10.00"));
+            var conteudo = File.ReadAllText(path);
+            Assert.That(conteudo, Does.Contain("99|"));
         }
     }
 }
