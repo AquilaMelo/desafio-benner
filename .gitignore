@@ -64,3 +64,6 @@ nunit-*.xml
 *.user
 *.suo
 out/
+
+# Pastas de pacotes do NuGet
+packages/
